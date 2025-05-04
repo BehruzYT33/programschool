@@ -21,72 +21,125 @@
             height: 100vh;
             flex-direction: column;
         }
-        .button {
-            background: #2575fc;
-            color: #fff;
-            padding: 15px 30px;
-            margin: 10px;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 18px;
-            transition: background 0.3s, transform 0.2s;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .button:hover {
-            background: #6a11cb;
-            transform: scale(1.05);
-        }
-        .icon {
-            font-size: 24px;
-        }
-        .login-page, .dashboard, .schedule-page {
-            display: none;
-        }
-        .login-page {
-            display: flex;
-        }
         .login-form {
             background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
+            padding: 40px;
             border-radius: 20px;
             text-align: center;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             animation: fadeIn 1s ease-in-out;
-        }
-        .login-form input {
-            padding: 12px;
-            margin: 15px 0;
-            border: none;
-            border-radius: 5px;
             width: 100%;
-            font-size: 16px;
+            max-width: 400px;
+            backdrop-filter: blur(10px);
         }
-        .login-form button {
-            padding: 12px;
-            background: #2575fc;
+        .avatar-circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        .avatar-circle::before {
+            content: '';
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: linear-gradient(
+                45deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+        .avatar-circle i {
+            font-size: 50px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            z-index: 1;
+            animation: bounce 2s infinite;
+        }
+        .input-group {
+            position: relative;
+            margin: 20px 0;
+        }
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 5px rgba(106, 17, 203, 0.3);
+            animation: pulse 2s infinite;
+        }
+        .input-icon i {
+            color: white;
+            font-size: 18px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 60px;
             border: none;
-            border-radius: 5px;
-            color: #fff;
-            cursor: pointer;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        .input-group input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .input-group input:focus {
+            background: rgba(255, 255, 255, 0.3);
+            outline: none;
+        }
+        .login-button {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            color: white;
             font-size: 16px;
             font-weight: bold;
-            transition: background 0.3s;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+            position: relative;
+            overflow: hidden;
         }
-        .login-form button:hover {
-            background: #6a11cb;
+        .login-button::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, transparent 60%);
+            transform: rotate(45deg);
+            animation: buttonShine 3s infinite;
         }
-        .login-form h2 {
-            margin-bottom: 20px;
-            font-size: 24px;
-        }
-        .login-form i {
-            font-size: 50px;
-            color: #6a11cb;
-            margin-bottom: 20px;
+        .login-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 117, 252, 0.6);
         }
         .schedule {
             max-width: 600px;
@@ -95,14 +148,18 @@
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             margin: 20px auto;
+            backdrop-filter: blur(10px);
         }
         .schedule h2 {
             margin-bottom: 20px;
             text-align: center;
+            color: white;
+            font-size: 24px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         .lesson {
             margin: 10px 0;
-            padding: 10px;
+            padding: 15px;
             border-radius: 10px;
             background: rgba(255, 255, 255, 0.2);
             cursor: pointer;
@@ -112,18 +169,98 @@
             justify-content: space-between;
         }
         .lesson:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
             background: rgba(255, 255, 255, 0.3);
-        }
-        .lesson .emoji {
-            font-size: 24px;
         }
         .lesson-details {
             display: none;
             margin-top: 10px;
-            padding: 10px;
+            padding: 15px;
             background: rgba(0, 0, 0, 0.2);
             border-radius: 10px;
+        }
+        .homework {
+            color: #ff6666;
+            font-weight: bold;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .homework i {
+            font-size: 20px;
+            animation: bounce 2s infinite;
+        }
+        .chat-button {
+            background: #6a11cb;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-left: 10px;
+            animation: pulse 2s infinite;
+        }
+        .chat-button:hover {
+            transform: scale(1.1);
+            background: #2575fc;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+        }
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            color: #333;
+        }
+        .close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #6a11cb;
+        }
+        .modal-content textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 16px;
+            resize: vertical;
+        }
+        .send-button {
+            background: linear-gradient(45deg, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .send-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
         }
         @keyframes fadeIn {
             from {
@@ -135,49 +272,105 @@
                 transform: translateY(0);
             }
         }
+        @keyframes shine {
+            0% {
+                left: -150%;
+            }
+            50% {
+                left: 150%;
+            }
+            100% {
+                left: -150%;
+            }
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+        @keyframes buttonShine {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Страница входа -->
-    <div class="login-page">
-        <div class="centered">
-            <div class="login-form">
-                <i class="fa fa-user-circle"></i>
-                <h2>Вход в систему</h2>
-                <input type="text" id="username" placeholder="Введите имя пользователя">
-                <input type="password" id="password" placeholder="Введите пароль">
-                <button onclick="login()">Войти</button>
+    <div class="centered login-page">
+        <div class="login-form">
+            <div class="avatar-circle">
+                <i class="fas fa-user-astronaut"></i>
             </div>
-        </div>
-    </div>
-
-    <!-- Главная страница -->
-    <div class="dashboard">
-        <div class="centered">
-            <h1>Добро пожаловать, Behruz!</h1>
-            <a href="#" class="button" onclick="showSchedule()">
-                <i class="icon fa fa-book"></i> Дневник
-            </a>
+            <h2>Вход в систему</h2>
+            <div class="input-group">
+                <div class="input-icon">
+                    <i class="fas fa-user-ninja"></i>
+                </div>
+                <input type="text" id="username" placeholder="Имя пользователя">
+            </div>
+            <div class="input-group">
+                <div class="input-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <input type="password" id="password" placeholder="Пароль">
+            </div>
+            <button class="login-button">
+                <i class="fas fa-rocket"></i>
+                Войти
+            </button>
         </div>
     </div>
 
     <!-- Страница расписания -->
-    <div class="schedule-page">
+    <div class="schedule-page" style="display: none;">
         <div class="schedule">
-            <h2>📅 Расписание: 5 - 11 мая</h2>
+            <h2>📅 Расписание: 4 - 10 мая</h2>
             <div class="lesson" onclick="toggleDetails(this)">
                 <div>
                     <strong>Вторник</strong> — 17:40-19:30 — Программирование HTML
                 </div>
-                <span class="emoji">💻</span>
+                <div class="chat-button" onclick="showChat(event)">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
                 <div class="lesson-details">
-                    <p><strong>Кабинет:</strong> 25</p>
-                    <p><strong>Учитель:</strong> Фирсова В.А</p>
-                    <p><strong>Тема:</strong> -</p>
-                    <p><strong>Домашнее задание:</strong> На этот урок не назначено домашнее задание</p>
-                    <p><strong>Отметка:</strong> На этот урок не выставлено отметка</p>
+                    <p><i class="fas fa-code"></i> <strong>Тема:</strong> HTML5-семантические теги</p>
+                    <p class="homework">
+                        <i class="fas fa-tasks"></i>
+                        <strong>Домашнее задание:</strong> Повторение и сделать свой проект
+                    </p>
+                    <p><i class="fas fa-user"></i> <strong>Учитель:</strong> Фирсова В.А</p>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно для чата -->
+    <div class="modal" id="chatModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeChat()">&times;</span>
+            <h3>Сообщение учителю</h3>
+            <textarea placeholder="Напишите ваше сообщение..."></textarea>
+            <button class="send-button" onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i> Отправить
+            </button>
         </div>
     </div>
 
@@ -186,17 +379,12 @@
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
 
-            if (username === 'behruz' && password === 'an45456767') {
+            if (username === 'BehruzYT33' && password === 'an45456767') {
                 document.querySelector('.login-page').style.display = 'none';
-                document.querySelector('.dashboard').style.display = 'flex';
+                document.querySelector('.schedule-page').style.display = 'block';
             } else {
                 alert('Неверное имя пользователя или пароль!');
             }
-        }
-
-        function showSchedule() {
-            document.querySelector('.dashboard').style.display = 'none';
-            document.querySelector('.schedule-page').style.display = 'block';
         }
 
         function toggleDetails(lessonElement) {
@@ -207,6 +395,22 @@
                 details.style.display = 'block';
             }
         }
+
+        function showChat(event) {
+            event.stopPropagation();
+            document.getElementById('chatModal').style.display = 'flex';
+        }
+
+        function closeChat() {
+            document.getElementById('chatModal').style.display = 'none';
+        }
+
+        function sendMessage() {
+            alert('Сообщение отправлено учителю!');
+            closeChat();
+        }
+
+        document.querySelector('.login-button').addEventListener('click', login);
     </script>
 </body>
 </html>
