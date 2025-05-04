@@ -13,14 +13,47 @@
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             color: #fff;
             overflow-x: hidden;
+            min-height: 100vh;
         }
+
         .centered {
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            flex-direction: column;
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
         }
+
+        /* Стили для даты и времени */
+        .datetime {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 12px 24px;
+            border-radius: 15px;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            color: white;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            animation: slideIn 0.5s ease;
+        }
+
+        .datetime i {
+            color: #6a11cb;
+            background: white;
+            padding: 8px;
+            border-radius: 50%;
+            font-size: 16px;
+            animation: pulse 2s infinite;
+        }
+
+        /* Стили для формы входа */
         .login-form {
             background: rgba(255, 255, 255, 0.1);
             padding: 40px;
@@ -32,6 +65,7 @@
             max-width: 400px;
             backdrop-filter: blur(10px);
         }
+
         .avatar-circle {
             width: 100px;
             height: 100px;
@@ -45,6 +79,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .avatar-circle::before {
             content: '';
             position: absolute;
@@ -59,6 +94,7 @@
             transform: rotate(45deg);
             animation: shine 3s infinite;
         }
+
         .avatar-circle i {
             font-size: 50px;
             color: white;
@@ -66,10 +102,12 @@
             z-index: 1;
             animation: bounce 2s infinite;
         }
+
         .input-group {
             position: relative;
             margin: 20px 0;
         }
+
         .input-icon {
             position: absolute;
             left: 15px;
@@ -85,10 +123,12 @@
             box-shadow: 0 2px 5px rgba(106, 17, 203, 0.3);
             animation: pulse 2s infinite;
         }
+
         .input-icon i {
             color: white;
             font-size: 18px;
         }
+
         .input-group input {
             width: 100%;
             padding: 15px 15px 15px 60px;
@@ -98,14 +138,18 @@
             color: white;
             font-size: 16px;
             transition: all 0.3s ease;
+            box-sizing: border-box;
         }
+
         .input-group input::placeholder {
             color: rgba(255, 255, 255, 0.7);
         }
+
         .input-group input:focus {
             background: rgba(255, 255, 255, 0.3);
             outline: none;
         }
+
         .login-button {
             background: linear-gradient(45deg, #6a11cb, #2575fc);
             border: none;
@@ -126,6 +170,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .login-button::before {
             content: '';
             position: absolute;
@@ -137,182 +182,185 @@
             transform: rotate(45deg);
             animation: buttonShine 3s infinite;
         }
+
+        .login-button i {
+            font-size: 20px;
+        }
+
         .login-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(37, 117, 252, 0.6);
         }
-        .schedule {
-            max-width: 600px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-            margin: 20px auto;
+
+        /* Стили для уведомления о блокировке */
+        .block-notification {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            color: #333;
+            z-index: 1000;
+            animation: slideIn 0.5s ease-out;
             backdrop-filter: blur(10px);
         }
-        .schedule h2 {
-            margin-bottom: 20px;
-            text-align: center;
-            color: white;
-            font-size: 24px;
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-        .lesson {
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            cursor: pointer;
-            transition: transform 0.3s, background 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .lesson:hover {
-            transform: scale(1.02);
-            background: rgba(255, 255, 255, 0.3);
-        }
-        .lesson-details {
-            display: none;
-            margin-top: 10px;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-        }
-        .homework {
-            color: #ff6666;
-            font-weight: bold;
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .homework i {
-            font-size: 20px;
-            animation: bounce 2s infinite;
-        }
-        .chat-button {
-            background: #6a11cb;
-            color: white;
-            width: 40px;
-            height: 40px;
+
+        .block-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(45deg, #ff6b6b, #ff4757);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: transform 0.2s;
-            margin-left: 10px;
+            margin: 0 auto 20px;
             animation: pulse 2s infinite;
+            box-shadow: 0 10px 30px rgba(255, 71, 87, 0.3);
         }
-        .chat-button:hover {
-            transform: scale(1.1);
-            background: #2575fc;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(5px);
-        }
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            width: 90%;
-            max-width: 500px;
-            position: relative;
-            color: #333;
-        }
-        .close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #6a11cb;
-        }
-        .modal-content textarea {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            margin: 20px 0;
-            font-size: 16px;
-            resize: vertical;
-        }
-        .send-button {
-            background: linear-gradient(45deg, #6a11cb, #2575fc);
+
+        .block-icon i {
+            font-size: 50px;
             color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+
+        .block-title {
+            color: #ff4757;
+            font-size: 24px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 0 2px 4px rgba(255, 71, 87, 0.1);
+        }
+
+        .block-info {
+            margin: 20px 0;
+            padding: 20px;
+            background: rgba(255, 71, 87, 0.1);
+            border-radius: 15px;
+            text-align: left;
+        }
+
+        .block-info p {
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
             font-size: 16px;
+        }
+
+        .block-info i {
+            color: #ff4757;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 71, 87, 0.1);
+            border-radius: 50%;
+            padding: 12px;
+        }
+
+        .contact-admin {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(106, 17, 203, 0.1);
+            border-radius: 15px;
+            color: #6a11cb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
             font-weight: bold;
             transition: all 0.3s ease;
         }
-        .send-button:hover {
+
+        .contact-admin:hover {
+            background: rgba(106, 17, 203, 0.2);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
         }
+
+        .contact-admin i {
+            font-size: 24px;
+            animation: bounce 2s infinite;
+        }
+
+        /* Стили для расписания */
+        .schedule {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .schedule-page {
+            display: none;
+            padding: 20px;
+        }
+
+        .lesson {
+            background: rgba(255, 255, 255, 0.2);
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lesson:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Анимации */
         @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translate(-50%, -60%); }
+            to { opacity: 1; transform: translate(-50%, -50%); }
+        }
+
         @keyframes shine {
-            0% {
-                left: -150%;
-            }
-            50% {
-                left: 150%;
-            }
-            100% {
-                left: -150%;
-            }
+            0% { left: -150%; }
+            50% { left: 150%; }
+            100% { left: -150%; }
         }
+
         @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
         }
+
         @keyframes bounce {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.1);
-            }
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
+
         @keyframes buttonShine {
-            0% {
-                transform: translate(-50%, -50%) rotate(0deg);
-            }
-            100% {
-                transform: translate(-50%, -50%) rotate(360deg);
-            }
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
     </style>
 </head>
 <body>
+    <!-- Текущая дата и время -->
+    <div class="datetime" id="datetime" style="display: none;">
+        <i class="fas fa-clock"></i>
+        <span id="currentDateTime">2025-05-04 19:23:53</span>
+    </div>
+
     <!-- Страница входа -->
     <div class="centered login-page">
         <div class="login-form">
@@ -339,78 +387,49 @@
         </div>
     </div>
 
+    <!-- Уведомление о блокировке -->
+    <div class="block-notification" id="blockNotification" style="display: none;">
+        <div class="block-icon">
+            <i class="fas fa-user-lock"></i>
+        </div>
+        <div class="block-title">Вы заблокированы администратором</div>
+        <div class="block-info">
+            <p><i class="fas fa-calendar-alt"></i> <strong>Дата:</strong> 04.05.2025</p>
+            <p><i class="fas fa-clock"></i> <strong>Время:</strong> 19:23</p>
+            <p><i class="fas fa-exclamation-triangle"></i> <strong>Причина:</strong> Много пропусков</p>
+            <p><i class="fas fa-user"></i> <strong>Пользователь:</strong> elena</p>
+        </div>
+        <div class="contact-admin">
+            <i class="fas fa-headset"></i>
+            Для разблокировки обратитесь к администратору системы
+        </div>
+    </div>
+
     <!-- Страница расписания -->
-    <div class="schedule-page" style="display: none;">
+    <div class="schedule-page" id="schedulePage" style="display: none;">
+        <div class="datetime">
+            <i class="fas fa-clock"></i>
+            <span id="scheduleDateTime">2025-05-04 19:23:53</span>
+        </div>
         <div class="schedule">
-            <h2>📅 Расписание: 4 - 10 мая</h2>
-            <div class="lesson" onclick="toggleDetails(this)">
-                <div>
-                    <strong>Вторник</strong> — 17:40-19:30 — Программирование HTML
-                </div>
-                <div class="chat-button" onclick="showChat(event)">
-                    <i class="fas fa-paper-plane"></i>
-                </div>
-                <div class="lesson-details">
-                    <p><i class="fas fa-code"></i> <strong>Тема:</strong> HTML5-семантические теги</p>
-                    <p class="homework">
-                        <i class="fas fa-tasks"></i>
-                        <strong>Домашнее задание:</strong> Повторение и сделать свой проект
-                    </p>
-                    <p><i class="fas fa-user"></i> <strong>Учитель:</strong> Фирсова В.А</p>
-                </div>
+            <h2>📅 Расписание занятий</h2>
+            <div class="lesson">
+                <h3>Программирование</h3>
+                <p>Время: 15:00 - 16:30</p>
+                <p>Преподаватель: Иванов И.И.</p>
+            </div>
+            <div class="lesson">
+                <h3>Web-разработка</h3>
+                <p>Время: 17:00 - 18:30</p>
+                <p>Преподаватель: Петров П.П.</p>
             </div>
         </div>
     </div>
 
-    <!-- Модальное окно для чата -->
-    <div class="modal" id="chatModal">
-        <div class="modal-content">
-            <span class="close" onclick="closeChat()">&times;</span>
-            <h3>Сообщение учителю</h3>
-            <textarea placeholder="Напишите ваше сообщение..."></textarea>
-            <button class="send-button" onclick="sendMessage()">
-                <i class="fas fa-paper-plane"></i> Отправить
-            </button>
-        </div>
-    </div>
-
     <script>
-        function login() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-
-            if (username === 'BehruzYT33' && password === 'an45456767') {
-                document.querySelector('.login-page').style.display = 'none';
-                document.querySelector('.schedule-page').style.display = 'block';
-            } else {
-                alert('Неверное имя пользователя или пароль!');
-            }
-        }
-
-        function toggleDetails(lessonElement) {
-            const details = lessonElement.querySelector('.lesson-details');
-            if (details.style.display === 'block') {
-                details.style.display = 'none';
-            } else {
-                details.style.display = 'block';
-            }
-        }
-
-        function showChat(event) {
-            event.stopPropagation();
-            document.getElementById('chatModal').style.display = 'flex';
-        }
-
-        function closeChat() {
-            document.getElementById('chatModal').style.display = 'none';
-        }
-
-        function sendMessage() {
-            alert('Сообщение отправлено учителю!');
-            closeChat();
-        }
-
-        document.querySelector('.login-button').addEventListener('click', login);
-    </script>
-</body>
-</html>
+        function updateDateTime() {
+            const now = new Date();
+            const formatted = now.toISOString().slice(0, 19).replace('T', ' ');
+            document.getElementById('currentDateTime').textContent = formatted;
+            if (document.getElementById('scheduleDateTime')) {
+                document.getElementById('scheduleDateTime
