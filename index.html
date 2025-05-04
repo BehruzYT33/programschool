@@ -34,7 +34,7 @@
             padding: 12px 24px;
             border-radius: 15px;
             backdrop-filter: blur(5px);
-            display: flex;
+            display: none;
             align-items: center;
             gap: 10px;
             font-size: 14px;
@@ -103,6 +103,7 @@
             animation: bounce 2s infinite;
         }
 
+        /* Стили для полей ввода */
         .input-group {
             position: relative;
             margin: 20px 0;
@@ -150,6 +151,7 @@
             outline: none;
         }
 
+        /* Стили кнопки входа */
         .login-button {
             background: linear-gradient(45deg, #6a11cb, #2575fc);
             border: none;
@@ -292,18 +294,18 @@
         }
 
         /* Стили для расписания */
-        .schedule {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-        }
-
         .schedule-page {
             display: none;
             padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .schedule {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
         }
 
         .lesson {
@@ -311,13 +313,12 @@
             margin: 10px 0;
             padding: 15px;
             border-radius: 10px;
-            cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .lesson:hover {
-            background: rgba(255, 255, 255, 0.3);
             transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.3);
         }
 
         /* Анимации */
@@ -352,13 +353,49 @@
             0% { transform: translate(-50%, -50%) rotate(0deg); }
             100% { transform: translate(-50%, -50%) rotate(360deg); }
         }
+
+        .blocked-message {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .blocked-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+            position: relative;
+            animation: popIn 0.5s ease;
+        }
+
+        @keyframes popIn {
+            from {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Текущая дата и время -->
-    <div class="datetime" id="datetime" style="display: none;">
+    <div class="datetime" id="datetime">
         <i class="fas fa-clock"></i>
-        <span id="currentDateTime">2025-05-04 19:23:53</span>
+        <span id="currentDateTime">2025-05-04 19:31:10</span>
     </div>
 
     <!-- Страница входа -->
@@ -388,14 +425,14 @@
     </div>
 
     <!-- Уведомление о блокировке -->
-    <div class="block-notification" id="blockNotification" style="display: none;">
+    <div class="block-notification" id="blockNotification">
         <div class="block-icon">
             <i class="fas fa-user-lock"></i>
         </div>
         <div class="block-title">Вы заблокированы администратором</div>
         <div class="block-info">
             <p><i class="fas fa-calendar-alt"></i> <strong>Дата:</strong> 04.05.2025</p>
-            <p><i class="fas fa-clock"></i> <strong>Время:</strong> 19:23</p>
+            <p><i class="fas fa-clock"></i> <strong>Время:</strong> 19:31</p>
             <p><i class="fas fa-exclamation-triangle"></i> <strong>Причина:</strong> Много пропусков</p>
             <p><i class="fas fa-user"></i> <strong>Пользователь:</strong> elena</p>
         </div>
@@ -406,11 +443,7 @@
     </div>
 
     <!-- Страница расписания -->
-    <div class="schedule-page" id="schedulePage" style="display: none;">
-        <div class="datetime">
-            <i class="fas fa-clock"></i>
-            <span id="scheduleDateTime">2025-05-04 19:23:53</span>
-        </div>
+    <div class="schedule-page" id="schedulePage">
         <div class="schedule">
             <h2>📅 Расписание занятий</h2>
             <div class="lesson">
@@ -427,9 +460,41 @@
     </div>
 
     <script>
+        // Функция обновления даты и времени
         function updateDateTime() {
             const now = new Date();
             const formatted = now.toISOString().slice(0, 19).replace('T', ' ');
             document.getElementById('currentDateTime').textContent = formatted;
-            if (document.getElementById('scheduleDateTime')) {
-                document.getElementById('scheduleDateTime
+        }
+
+        // Функция входа
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'elena' && password === 'elena') {
+                // Показываем уведомление о блокировке для elena
+                document.getElementById('datetime').style.display = 'flex';
+                document.querySelector('.login-page').style.display = 'none';
+                document.getElementById('blockNotification').style.display = 'block';
+            } else if (username === 'BehruzYT33' && password === 'an45456767') {
+                // Показываем расписание для BehruzYT33
+                document.getElementById('datetime').style.display = 'flex';
+                document.querySelector('.login-page').style.display = 'none';
+                document.getElementById('schedulePage').style.display = 'block';
+            } else {
+                alert('Неверное имя пользователя или пароль!');
+            }
+        }
+
+        // Добавляем обработчик события на кнопку входа
+        document.querySelector('.login-button').addEventListener('click', login);
+
+        // Обновляем время каждую секунду
+        setInterval(updateDateTime, 1000);
+
+        // Устанавливаем начальное время
+        updateDateTime();
+    </script>
+</body>
+</html>
