@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Личный кабинет ученика</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            color: #fff;
+            overflow-x: hidden;
+        }
+        .centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .button {
+            background: #2575fc;
+            color: #fff;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s, transform 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .button:hover {
+            background: #6a11cb;
+            transform: scale(1.05);
+        }
+        .icon {
+            font-size: 24px;
+        }
+        .login-page, .dashboard, .schedule-page {
+            display: none;
+        }
+        .login-page {
+            display: flex;
+        }
+        .login-form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 1s ease-in-out;
+        }
+        .login-form input {
+            padding: 12px;
+            margin: 15px 0;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 16px;
+        }
+        .login-form button {
+            padding: 12px;
+            background: #2575fc;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .login-form button:hover {
+            background: #6a11cb;
+        }
+        .login-form h2 {
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+        .login-form i {
+            font-size: 50px;
+            color: #6a11cb;
+            margin-bottom: 20px;
+        }
+        .schedule {
+            max-width: 600px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            margin: 20px auto;
+        }
+        .schedule h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .lesson {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s, background 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .lesson:hover {
+            transform: scale(1.05);
+            background: rgba(255, 255, 255, 0.3);
+        }
+        .lesson .emoji {
+            font-size: 24px;
+        }
+        .lesson-details {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Страница входа -->
+    <div class="login-page">
+        <div class="centered">
+            <div class="login-form">
+                <i class="fa fa-user-circle"></i>
+                <h2>Вход в систему</h2>
+                <input type="text" id="username" placeholder="Введите имя пользователя">
+                <input type="password" id="password" placeholder="Введите пароль">
+                <button onclick="login()">Войти</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Главная страница -->
+    <div class="dashboard">
+        <div class="centered">
+            <h1>Добро пожаловать, Behruz!</h1>
+            <a href="#" class="button" onclick="showSchedule()">
+                <i class="icon fa fa-book"></i> Дневник
+            </a>
+        </div>
+    </div>
+
+    <!-- Страница расписания -->
+    <div class="schedule-page">
+        <div class="schedule">
+            <h2>📅 Расписание: 5 - 11 мая</h2>
+            <div class="lesson" onclick="toggleDetails(this)">
+                <div>
+                    <strong>Вторник</strong> — 17:40-19:30 — Программирование HTML
+                </div>
+                <span class="emoji">💻</span>
+                <div class="lesson-details">
+                    <p><strong>Кабинет:</strong> 25</p>
+                    <p><strong>Учитель:</strong> Фирсова В.А</p>
+                    <p><strong>Тема:</strong> -</p>
+                    <p><strong>Домашнее задание:</strong> На этот урок не назначено домашнее задание</p>
+                    <p><strong>Отметка:</strong> На этот урок не выставлено отметка</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'behruz' && password === 'an45456767') {
+                document.querySelector('.login-page').style.display = 'none';
+                document.querySelector('.dashboard').style.display = 'flex';
+            } else {
+                alert('Неверное имя пользователя или пароль!');
+            }
+        }
+
+        function showSchedule() {
+            document.querySelector('.dashboard').style.display = 'none';
+            document.querySelector('.schedule-page').style.display = 'block';
+        }
+
+        function toggleDetails(lessonElement) {
+            const details = lessonElement.querySelector('.lesson-details');
+            if (details.style.display === 'block') {
+                details.style.display = 'none';
+            } else {
+                details.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
